@@ -27,69 +27,96 @@ export class NewsComponent extends Component{
         };
     }
 
-    
-    async componentDidMount(){
-        this.setState(
-            {
-                loading: true
-            }
-        )
-        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&pagesize=${this.state.pageSize}`;
-        let data = await fetch(url);
-        let parsedData = await data.json();
-        console.log(parsedData);
-        this.setState(
-            {
-                articles: parsedData.articles, 
-                totalResults: parsedData.totalResults,
-                loading: false
-            }
-        );
-    }
-
-    handleNextClick = async () => {
-        if (!(Math.ceil(this.state.totalResults / 20) < this.state.page + 1)){
-            this.setState(
-                {
-                    loading: true
-                }
-            )
-            const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${this.state.page+1}&pagesize=${this.state.pageSize}`;
-            let data = await fetch(url);
-            let parsedData = await data.json();
-            console.log(parsedData);
-            this.setState({
-                page: this.state.page+1,
-                articles: parsedData.articles,
-                loading: false
-            });
-            console.log("Page No: " + this.state.page);  
-        }
-        
-    }
-
-    handlePrevClick = async () => {
-        this.setState(
-            {
-                loading: true
-            }
-        )
-
-        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${this.state.page-1}&pagesize=${this.state.pageSize}`;
-        let data = await fetch(url);
-        let parsedData = await data.json();
-        console.log(parsedData);
+    async updatePage(pageNo){
         this.setState({
-            page: this.state.page-1,
-            articles: parsedData.articles,
+            loading: true
+    });
+        
+        // const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${this.state.page}&pagesize=${this.state.pageSize}`;
+        
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${pageNo}&pagesize=${this.state.pageSize}`;
+        
+        // console.log("Fetching initiated")            // ---------
+        let data = await fetch(url);
+        console.log("URL Fetched")                      // ---------
+        let parsedData = await data.json();
+        // console.log("JSON Converted")                // ---------
+        console.log("Page No: " + this.state.page);
+        // console.log(parsedData);                     // ---------
+        this.setState({
+            articles: parsedData.articles, 
+            totalResults: parsedData.totalResults,
             loading: false
         });
+        // console.log("State Updated")                 // ---------
+    }
+    
+    async componentDidMount(){
+    //     this.setState({
+    //         loading: true
+    // });
+        this.updatePage(this.state.page);
+        console.log("Component Mounted")                //This executes first
+    }
+
+
+    handleNextClick = async () => {
+        // if (!(Math.ceil(this.state.totalResults / 20) < this.state.page + 1)){
+        //     this.setState({
+        //             loading: true
+        //     });
+        // console.log("Before next updation")          // ---------
+        this.updatePage(this.state.page+1);
+        // console.log("After next updation")           // ---------
+        
+        this.setState({
+            page: this.state.page+1
+        });
+        // console.log("State Changed for Next")        // ---------
+        // console.log("Page No: " + this.state.page);  
+        
+        // this.updatePage(this.state.page+1);
+        // console.log("URL: " + url);  
+
+        // const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${this.state.page+1}&pagesize=${this.state.pageSize}`;
+        //     let data = await fetch(url);
+        //     let parsedData = await data.json();
+        //     console.log(parsedData);
+        //     this.setState({
+        //         page: this.state.page+1,
+        //         articles: parsedData.articles,
+        //         loading: false
+        //     });
+        }
+        
+    
+
+    handlePrevClick = async () => {
+        // this.setState({
+        //         loading: true
+        // });
+
+        this.updatePage(this.state.page-1);
+        this.setState({
+            page: this.state.page-1
+        });
+
+
+        // const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${this.state.page-1}&pagesize=${this.state.pageSize}`;
+        // let data = await fetch(url);
+        // let parsedData = await data.json();
+        // console.log(parsedData);
+        // this.setState({
+        //     page: this.state.page-1,
+        //     articles: parsedData.articles,
+        //     loading: false
+        // });
     }
 
     render(){
         return(
             <div className="container my-3">
-                <h1 className="text-center">Top Fucking {this.props.category.replace(this.props.category[0], this.props.category[0].toUpperCase())} Headlines</h1>
+                <h1 className="text-center">Top Fucking {this.props.category.replace(this.props.category[0], this.props.category[0].toUpperCase())} USA Headlines</h1>
                 {this.state.loading && <Spinner />}
                 <div className="container">
                     <div className="row">
