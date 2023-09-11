@@ -171,6 +171,9 @@ export class NewsComponent extends Component {
                                     <NewsComponentItem title={element.title} description={element.description} imgURL={element.urlToImage} redirection={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                                 </div>
                             }
+                            else{
+                                return null;
+                            }
                         })}
                     </div>
 

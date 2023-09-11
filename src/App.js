@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import { NewsComponent } from './components/NewsComponent';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar';
-import PropTypes from "prop-types"
 
 
 
