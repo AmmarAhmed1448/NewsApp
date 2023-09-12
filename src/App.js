@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import { NewsComponent } from './components/NewsComponent';
-import { BrowserRouter as Router, Routes, Route, useSearchParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar';
 import { useState } from 'react';
 

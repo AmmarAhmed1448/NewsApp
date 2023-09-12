@@ -93,7 +93,7 @@ export function NewsComponent(props) {
             // console.log("State Updated")                 // ---------
         }
         catch (error) {
-            console.log(`Fucking error occured: ${error.message}`)
+            console.log(`Fucking error message: ${error.message}`)
         }
     }
 
@@ -110,15 +110,15 @@ export function NewsComponent(props) {
     
 
 
-    const handleNextClick = async () => {
+    // const handleNextClick = async () => {
         // if (!(Math.ceil(this.state.totalResults / 20) < this.state.page + 1)){
         //     this.setState({
         //             loading: true
         //     });
         // console.log("Before next updation")          // ---------
-        updatePage(page + 1);
+        // updatePage(page + 1);
         // console.log("After next updation")           // ---------
-        setPage(page + 1);
+        // setPage(page + 1);
 
         // this.setState({
         //     page: this.state.page + 1
@@ -138,17 +138,17 @@ export function NewsComponent(props) {
         //         articles: parsedData.articles,
         //         loading: false
         //     });
-    }
+    // }
 
 
 
-    const handlePrevClick = async () => {
+    // const handlePrevClick = async () => {
         // this.setState({
         //         loading: true
         // });
 
-        updatePage(page - 1);
-        setPage(page - 1);
+        // updatePage(page - 1);
+        // setPage(page - 1);
         // this.setState({
         //     page: this.state.page - 1
         // });
@@ -163,7 +163,7 @@ export function NewsComponent(props) {
         //     articles: parsedData.articles,
         //     loading: false
         // });
-    }
+    // }
 
 
         return (
