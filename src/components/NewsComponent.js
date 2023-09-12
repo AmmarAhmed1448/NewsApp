@@ -5,6 +5,8 @@ import { Spinner } from "./Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export class NewsComponent extends Component {
+
+    apiKey = process.env.REACT_APP_API_KEY
     static defaultProps = {
         pageSize: 20,
         country: "us",
@@ -35,7 +37,7 @@ export class NewsComponent extends Component {
             loading: true,
         });
 
-        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${this.state.page + 1}&pagesize=${this.state.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.apiKey}&page=${this.state.page + 1}&pagesize=${this.state.pageSize}`;
         let data = await fetch(url);
         let parsedData = await data.json();
 
@@ -57,7 +59,7 @@ export class NewsComponent extends Component {
         // const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${this.state.page}&pagesize=${this.state.pageSize}`;
 
         try {
-            const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=3d87cc71688e4deeb837e82bf5a1453d&page=${pageNo}&pagesize=${this.state.pageSize}`;
+            const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.apiKey}&page=${pageNo}&pagesize=${this.state.pageSize}`;
 
             // console.log("Fetching initiated")            // ---------
             let data = await fetch(url);
