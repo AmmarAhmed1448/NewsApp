@@ -12,7 +12,7 @@ export function NewsComponent(props) {
     const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(20);
-    const [totalResults, setTotalResults] = useState(0);
+    const [totalResults, setTotalResults] = useState(100);
 
     useEffect(() => {
         updatePage(page);
@@ -81,6 +81,7 @@ export function NewsComponent(props) {
             // console.log("Page No: " + this.state.page);  // --------
             setArticles(parsedData.articles);
             setTotalResults(parsedData.totalResults);
+            console.log(totalResults);
             console.log(parsedData);                     // ---------
             setLoading(false);
 
@@ -173,10 +174,16 @@ export function NewsComponent(props) {
                     next={fetchMoreData}
                     hasMore={(page * pageSize < 100) && (page * pageSize < totalResults)}
                     loader={<Spinner />}
-                    endMessage={<h1 style={{ textAlign: "center", backgroundColor: "blue", color: "white" }}>Thats all the fucking news we have!!!</h1>}
+                    endMessage={
+                        <div style={{display: "flex", backgroundColor: "#0077b6", height: "10rem",justifyContent: "center"}}>
+                            <h1 style={{margin: "auto", color: "white"}}>Thats all fucking news we have!</h1>
+                        </div>
+                            /* <h1 style={{ textAlign: "center", backgroundColor: "blue", color: "white" }}>Thats all the fucking news we have!</h1> */
+                }
                 >
+                
 
-                    <h1 className="text-center">Top Fucking {props.category.replace(props.category[0], props.category[0].toUpperCase())} USA Headlines</h1>
+                    <h1 className="text-center" style={{marginTop:"5rem"}}>Top Fucking {props.category.replace(props.category[0], props.category[0].toUpperCase())} USA Headlines</h1>
                     {loading && <Spinner />}
                     {/* <div className="container" > */}
                     <div className="row">
